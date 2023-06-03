@@ -1,0 +1,73 @@
+<br/>
+<div class="container">
+  <div class="card">
+    <div class="card-header">Add Employee!</div>
+
+    <div class="card-body">
+<div>
+  <form [formGroup]="regionForm" (ngSubmit)="save()">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="regionId">Region Id</label>
+        <div class="col-md-8">
+          <input
+            class="form-control"
+           id="regionId" type="text"
+          placeholder="Region Id (required)"
+             formControlName="regionId"
+             [ngClass]="{
+               'is-invalid':
+                 (regionForm.get('regionId')?.touched ||
+                 regionForm.get('regionId')?.dirty) &&
+                 !regionForm.get('regionId')?.valid
+             }"
+           />
+           <span class="invalid-feedback">
+             <span *ngIf="regionForm.get('regionId')?.errors?.['required']">
+               Please enter your Region Id.
+             </span>
+           </span>
+         </div>
+         </div>
+         <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="regionName">Region Name</label>
+          <div class="col-md-8">
+            <input
+              class="form-control" id="regionName"
+             type="text"
+             placeholder="Region Name (required)"
+             formControlName="regionName"
+             [ngClass]="{
+               'is-invalid':
+                 (regionForm.get('regionName')?.touched ||
+                 regionForm.get('regionName')?.dirty) &&
+                 !regionForm.get('regionName')?.valid
+             }"
+           />
+           <span class="invalid-feedback">
+             <span *ngIf="regionForm.get('regionName')?.errors?.['required']">
+               Please enter your Region Name.
+             </span>
+             <!-- <span *ngIf="regionForm.get('regionName')?.errors?.['maxlength']">
+               The last name must be less than 20 characters.
+             </span>
+             <span *ngIf="regionForm.get('regionName')?.errors?.['minlength']">
+               The last name must be less than 3 characters.
+             </span>
+             <span *ngIf="regionForm.get('regionName')?.errors?.['maxlength']">
+               The last name must be max length 10 characters.
+             </span> -->
+           </span>
+         </div>
+         </div>
+    <div>
+      <button class="btn btn-primary">submit</button>
+    </div>
+  </form>
+</div>
+</div>
+
+</div>
+
+</div>
+

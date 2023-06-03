@@ -1,0 +1,16 @@
+<p>countries works!</p>
+<table class="table table-striped">
+  <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Region</th>
+    <th>Action</th>
+  </thead>
+<tr *ngFor="let country of countries">
+  <td> {{country.countryId}}</td>
+  <td> {{country.countryName}}</td>
+  <td> {{country.region.regionName}}</td>
+  <td><a class="btn btn-warning" routerLink="/countries/{{country.countryId}}"> Edit</a>
+    <a class="btn btn-danger" (click)="onClickDelete(country.countryId)"> Delete</a></td>
+</tr>
+</table>

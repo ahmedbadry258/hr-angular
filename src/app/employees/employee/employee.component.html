@@ -1,0 +1,94 @@
+
+<div class="row">
+  <div class="col-md-2">Filter by:</div>
+  <div class="col-md-4">
+    <input type="text"
+           [(ngModel)]="listFilter"  />
+  </div>
+</div>
+<div class="row"
+     *ngIf="listFilter">
+  <div class="col-md-6">
+    <h4>Filtered by: {{listFilter}}</h4>
+  </div>
+</div>
+<div class="row mb-5">
+  <div class="col">
+    <p>Add Search Here</p>
+  </div>
+  <div class="col">
+<button (click)="toggleImage()" class="btn btn-primary ">{{showImage===true ?'Hide Images':'Show Images'}}</button>
+<button (click)="toggleDetailsFilter()" class="btn btn-primary "> {{displayDetails=== true?'Hide Display Filter':'Show Display Filter'}}</button>
+  </div>
+  <app-criteria [details]="displayDetails"></app-criteria>
+</div>
+<div class="row">
+  <div class="col-3"  *ngFor="let employee of filteredEmployees" >
+
+
+<div class="card mb-3 mx-4 rounded-6">
+  <div class="card-body rounded-6" style="padding: .75rem;">
+      <div class="row pb-2 border-bottom">
+          <div class="col-4">
+              <img *ngIf="showImage" src="assets/imgs/{{randomIntFromInterval(1,10)}}.png" class="img-thumbnail" alt="img thumbnail">
+          </div>
+          <div class="col-8">
+              <div class="card-details">
+                  <h5 class="card-title fw-bolder p-0">{{employee.firstName }}{{employee.lastName }}</h5>
+                  <p class="card-text fw-light badge badge-danger rounded-6 mb-2 align-items-start">
+                      <span class="me-2"><i class="fab fa-js-square" style="line-height: initial"></i></span>Javascript developer</p>
+                  <div class="rate-stars d-block">
+                      <i class="fas fa-star star-full-color" style="font-size: 12px;"></i>
+                      <i class="fas fa-star star-full-color" style="font-size: 12px;"></i>
+                      <i class="fas fa-star-half star-full-color" style="font-size: 12px;"></i>
+                      <i class="fas fa-star star-no-color" style="font-size: 12px;"></i>
+                      <i class="fas fa-star star-no-color" style="font-size: 12px;"></i>
+                      <span class="ms-2 fw-bold">2.5</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="card-details no-padding-right">
+          <div class="row border-bottom">
+              <div class="col-6 py-3 d-flex">
+                  <span class="me-2"><i class="fas fa-phone-alt text-secondary"></i></span>
+                  <p class="card-text mb-1 text-secondary">{{employee.phoneNumber}}</p>
+              </div>
+              <div class="col-6 py-3 border-start d-flex">
+                      <span class="me-2"><i class="fas fa-envelope text-secondary"></i></span>
+                      <p class="card-text mb-1 text-secondary">{{employee.email}}</p>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-6 justify-content-start d-flex mt-3 align-items-center">
+              <!-- <input class="form-check-input" type="checkbox" value="" aria-label="..."> -->
+              <a title="Edit" routerLink="/employees/{{employee.employeeId}}" class="m-auto"><i class="fas fa-edit"></i></a>
+              <a title="Delete"  href="#" class="m-auto" ><i class="fa-solid fa-trash"></i></a>
+
+              <a title="Info" href="#" class="m-auto"> <i class="fa-sharp fa-solid fa-circle-info"></i></a>
+          </div>
+          <div class="col-6 justify-content-end d-flex mt-3">
+              <span class="py-2 badge badge-danger rounded-6"><i class="fas fa-circle me-2"></i>completed</span>
+          </div>
+
+      </div>
+      <div class="card-dropdown-wraaper position-absolute">
+          <div class="dropdown">
+              <a href="#" class="px-2 bg-primary rounded-circle bg-opacity-10"  id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v text-secondary p-2"></i>
+              </a>
+              <ul class="dropdown-menu shadow rounded-4 py-0" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-share me-3"></i>Complete data</a></li>
+
+                </ul>
+          </div>
+      </div>
+  </div>
+
+</div>
+
+
+</div>
+</div>
+

@@ -1,0 +1,18 @@
+<h4>Jobs</h4>
+<table >
+  <thead>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Max Salary</th>
+    <th>Min Salary</th>
+    <th>Action</th>
+  </thead>
+<tr *ngFor="let job of jobs">
+  <td> {{job.jobId}}</td>
+  <td> {{job.jobTitle}}</td>
+  <td> {{job.maxSalary}}</td>
+  <td> {{job.minSalary}}</td>
+  <td><a class="btn btn-warning" routerLink="/jobs/{{job.jobId}}"> Edit</a>
+    <a class="btn btn-danger" (click)="onClickDelete(job.jobId)"> Delete</a></td>
+</tr>
+</table>

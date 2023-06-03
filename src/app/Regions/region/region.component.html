@@ -1,0 +1,22 @@
+<div>
+  <h3>Region Management System</h3>
+
+
+  <table class="table" >
+    <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Actions</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let region of regionList">
+      <td>{{region.regionId}}</td>
+      <td>{{region.regionName}}</td>
+      <td>
+
+        <a class="btn btn-primary" routerLink="/regions/{{region.regionId}}">Edit</a>
+        <a class="btn btn-danger"   (click)="onClickDelete(region.regionId)">Delete</a></td>
+    </tr>
+  </tbody>
+  </table>
+</div>

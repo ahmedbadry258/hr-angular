@@ -1,0 +1,28 @@
+<div>
+  <h3>Region Management System</h3>
+
+
+  <table  >
+
+    <th>ID</th>
+    <th>Street Address</th>
+    <th>Postal Code</th>
+    <th>City</th>
+    <th>State Province</th>
+    <th>Country</th>
+    <th>Actions</th>
+
+    <tr *ngFor="let location of locationList">
+      <td>{{location.locationId}}</td>
+      <td>{{location.streetAddress}}</td>
+      <td>{{location.postalCode}}</td>
+      <td>{{location.city}}</td>
+      <td>{{location.stateProvince}}</td>
+      <td>{{location.country.countryName}}</td>
+      <td>
+
+        <a class="btn btn-primary" routerLink="/locations/{{location.locationId}}">Edit</a>
+        <a class="btn btn-danger"   (click)="onClickDelete(location.locationId)">Delete</a></td>
+    </tr>
+  </table>
+</div>

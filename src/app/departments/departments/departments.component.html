@@ -1,0 +1,22 @@
+<div>
+  <h3>Departments</h3>
+
+
+  <table  >
+
+    <th>ID</th>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Actions</th>
+
+    <tr *ngFor="let department of departmentList">
+      <td>{{department.departmentId}}</td>
+      <td>{{department.departmentName}}</td>
+      <td>{{department.location.city}}</td>
+      <td>
+
+        <a class="btn btn-primary" routerLink="/departments/{{department.departmentId}}">Edit</a>
+        <a class="btn btn-danger"   (click)="onClickDelete(department.departmentId)">Delete</a></td>
+    </tr>
+  </table>
+</div>

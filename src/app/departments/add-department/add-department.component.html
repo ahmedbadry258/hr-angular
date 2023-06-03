@@ -1,0 +1,23 @@
+<h4>Add Department</h4>
+<div>
+  <form (ngSubmit)="onSubmit()" #departmentForm=ngForm>
+    <div>
+      <label for="departmentId">Department Id</label>
+      <input id="departmentId" type="text"  name="departmentId"   [(ngModel)]="department.departmentId" />
+    </div>
+    <div>
+      <label for="departmentName">Department Name</label>
+      <input id="departmentName" type="text"  name="departmentName"   [(ngModel)]="department.departmentName"/>
+    </div>
+    <div>
+      <select name="locationId"  [(ngModel)]="department.location" > Location
+        <option [ngValue]="null" disabled>Select Region</option>
+        <option *ngFor="let location of locationList"   [value]="location">{{location.city}}</option>
+
+    </select>
+    </div>
+    <div>
+      <button class="btn btn-primary">submit</button>
+    </div>
+  </form>
+</div>

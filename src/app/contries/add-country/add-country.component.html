@@ -1,0 +1,23 @@
+<div>
+<h4>Country Form</h4>
+<form (ngSubmit)="onSubmit()" #countryForm=ngForm>
+<div class="group-control">
+    <label for="contryId">Country Id</label>
+    <input type="text" id="contryId" name="contryId" [(ngModel)]="country.countryId"/>
+</div>
+<div class="group-control">
+  <label for="contryName">Country Name</label>
+  <input type="text" id="contryName" name="contryName" [(ngModel)]="country.countryName"/>
+</div>
+<div>Region
+  <select name="region"  [(ngModel)]="country.region.regionId" >
+    <option [ngValue]="null" disabled>Select Region</option>
+    <option *ngFor="let region of regions"    [value]="region.regionId">{{region.regionName}}</option>
+  </select>
+</div>
+<div>
+  <button>submit</button>
+</div>
+</form>
+
+</div>

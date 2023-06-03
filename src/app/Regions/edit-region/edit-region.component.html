@@ -1,0 +1,20 @@
+<p>edit-region works!</p>
+<p>{{regionId}}</p>
+
+{{region.regionName}}
+<h4>Edit Region</h4>
+<div>
+  <form (ngSubmit)="onSubmit()" #regionForm=ngForm>
+    <div>
+      <label for="regionId">Region Id</label>
+      <input id="regionId" type="text"  name="regionId"  disabled="true" [(ngModel)]="region.regionId"/>
+    </div>
+    <div>
+      <label for="regionName">Region Name</label>
+      <input id="regionName" type="text"  name="regionName"   [(ngModel)]="region.regionName"/>
+    </div>
+    <div>
+      <button>submit</button>
+    </div>
+  </form>
+</div>

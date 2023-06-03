@@ -1,0 +1,24 @@
+<h4>Edit Job</h4>
+<div>
+  <form (ngSubmit)="onSubmit()" #jobForm=ngForm>
+    <div>
+      <label for="jobId">Job Id</label>
+      <input id="jobId" type="text"  name="jobId" disabled="disabled"   [(ngModel)]="job.jobId" />
+    </div>
+    <div>
+      <label for="jobTitle">Job Title</label>
+      <input id="jobTitle" type="text"  name="jobTitle"   [(ngModel)]="job.jobTitle"/>
+    </div>
+    <div>
+      <label for="minSalary">Min Salary</label>
+      <input id="minSalary" type="text"  name="minSalary"   [(ngModel)]="job.minSalary"/>
+    </div>
+    <div>
+      <label for="maxSalary">Max Salary</label>
+      <input id="maxSalary" type="text"  name="maxSalary"   [(ngModel)]="job.maxSalary"/>
+    </div>
+    <div>
+      <button class="btn btn-primary">submit</button>
+    </div>
+  </form>
+</div>
