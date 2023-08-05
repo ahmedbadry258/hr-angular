@@ -1,26 +1,19 @@
 
-<div class="row">
-  <div class="col-md-2">Filter by:</div>
-  <div class="col-md-4">
-    <input type="text"
-           [(ngModel)]="listFilter"  />
-  </div>
-</div>
-<div class="row"
-     *ngIf="listFilter">
-  <div class="col-md-6">
-    <h4>Filtered by: {{listFilter}}</h4>
-  </div>
-</div>
+<app-employee-search></app-employee-search>
+<app-criteria #filterCriteria
+[showDttails]="displayDetails"
+[hitsCount]="filteredEmployees.length"
+(valueChanges)="onValueChanges($event)">
+
+{{filterCriteria.listFilter}}
+</app-criteria>
 <div class="row mb-5">
-  <div class="col">
-    <p>Add Search Here</p>
-  </div>
-  <div class="col">
+
+<div class="col">
 <button (click)="toggleImage()" class="btn btn-primary ">{{showImage===true ?'Hide Images':'Show Images'}}</button>
 <button (click)="toggleDetailsFilter()" class="btn btn-primary "> {{displayDetails=== true?'Hide Display Filter':'Show Display Filter'}}</button>
-  </div>
-  <app-criteria [details]="displayDetails"></app-criteria>
+</div>
+
 </div>
 <div class="row">
   <div class="col-3"  *ngFor="let employee of filteredEmployees" >
@@ -63,10 +56,14 @@
       <div class="row">
           <div class="col-6 justify-content-start d-flex mt-3 align-items-center">
               <!-- <input class="form-check-input" type="checkbox" value="" aria-label="..."> -->
-              <a title="Edit" routerLink="/employees/{{employee.employeeId}}" class="m-auto"><i class="fas fa-edit"></i></a>
+              <a title="Edit" [routerLink]="['/employees',employee.employeeId,'edit']"
+              [queryParams]="{filterBy:filterComponent.listFilter, showImage:showImage}"
+              class="m-auto"><i class="fas fa-edit"></i></a>
               <a title="Delete"  href="#" class="m-auto" ><i class="fa-solid fa-trash"></i></a>
 
-              <a title="Info" href="#" class="m-auto"> <i class="fa-sharp fa-solid fa-circle-info"></i></a>
+              <a title="Info" [routerLink]="['/employees',employee.employeeId]"
+                              [queryParams]="{filterBy:filterComponent.listFilter, showImage:showImage}"
+                              class="m-auto"> <i class="fa-sharp fa-solid fa-circle-info"></i></a>
           </div>
           <div class="col-6 justify-content-end d-flex mt-3">
               <span class="py-2 badge badge-danger rounded-6"><i class="fas fa-circle me-2"></i>completed</span>
@@ -89,6 +86,26 @@
 </div>
 
 
+</div>
+</div>
+
+<hr>
+<div class="row  justify-content-center">
+
+<div class="col-4">
+
+
+    <select name="item"  [(ngModel)]="noOfItmes" (change)="setItems()">
+      <option *ngFor="let item of items"   [value]="item">{{item}}</option>
+    </select>
+
+</div>
+<div class="col">
+<ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let p of pages ; let i=index">
+    <a class="nav-link " [ngClass]="{'active':i==page}" (click)="setPage(i,$event)">{{i}}</a>
+  </li>
+</ul>
 </div>
 </div>
 

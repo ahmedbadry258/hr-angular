@@ -6,6 +6,7 @@
     <th>Region</th>
     <th>Action</th>
   </thead>
+  <tbody>
 <tr *ngFor="let country of countries">
   <td> {{country.countryId}}</td>
   <td> {{country.countryName}}</td>
@@ -13,4 +14,24 @@
   <td><a class="btn btn-warning" routerLink="/countries/{{country.countryId}}"> Edit</a>
     <a class="btn btn-danger" (click)="onClickDelete(country.countryId)"> Delete</a></td>
 </tr>
+</tbody>
 </table>
+<hr>
+<div class="row  justify-content-center">
+
+<div class="col-4">
+
+
+    <select name="item"  [(ngModel)]="noOfItmes" (change)="setItems()">
+      <option *ngFor="let item of items"   [value]="item">{{item}}</option>
+    </select>
+
+</div>
+<div class="col">
+<ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let p of pages ; let i=index">
+    <a class="nav-link " [ngClass]="{'active':i==page}" (click)="setPage(i,$event)">{{i}}</a>
+  </li>
+</ul>
+</div>
+</div>

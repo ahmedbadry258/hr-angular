@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeeComponent } from './employees/employee/employee.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes,RouterModule } from '@angular/router';
-
 import { RegionComponent } from './Regions/region/region.component';
 import { AddRegionComponent } from './Regions/add-region/add-region.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -29,52 +25,59 @@ import { AddDepartmentComponent } from './departments/add-department/add-departm
 import { EditDepartmentComponent } from './departments/edit-department/edit-department.component';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
 import { CacheInterceptor } from './core/cache.interceptor';
-import { AddEmployeeComponent } from './employees/add-employee/add-employee.component';
+
 import { EmployeeTemplateComponent } from './employee-template/employee-template.component';
 import { PractiseFormsComponent } from './practise-forms/practise-forms.component';
-import { EditEmployeeComponent } from './employees/edit-employee/edit-employee.component';
 import { ParentComponent } from './communication-component/parent/parent.component';
-import { CriteriaComponent } from './employees/criteria/criteria.component';
+
+import { WelcomeComponent } from './welcome/welcome.component';
+import { EmployeeModule } from './employees/employee.module';
+import { RegionsModule } from './Regions/regions.module';
+import { CountriesModule } from './contries/countries.module';
+import { DepartmentsModule } from './departments/departments.module';
+import { LocationsModule } from './locations/locations.module';
+import { JobsModule } from './jobs/jobs.module';
+import { UserModule } from './user/user.module';
+import { LoginComponent } from './user/login/login.component';
+import { MessageComponent } from './message/message.component';
+import { Ch1Component } from './communication-component/ch1/ch1.component';
+import { Ch2Component } from './communication-component/ch2/ch2.component';
+import { CommunicationModule } from './communication-component/communication.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ChartModule } from 'angular-highcharts';
 
 
+import { DashBoardComponent } from './dash-board/dash-board.component';
+import { MessageModule } from './message/message.module';
 @NgModule({
     declarations: [
         AppComponent,
-        EmployeeComponent,
-        RegionComponent,
-        AddRegionComponent,
         NavBarComponent,
         NotFoundComponent,
-        EditRegionComponent,
-        CountriesComponent,
-        AddCountryComponent,
-        EditCountryComponent,
-        LocationsComponent,
-        AddLocationComponent,
-        EditLocationComponent,
-        JobsComponent,
-        AddJobComponent,
-        EditJobComponent,
-        DepartmentsComponent,
-        AddDepartmentComponent,
-        EditDepartmentComponent,
-        AddEmployeeComponent,
         EmployeeTemplateComponent,
         PractiseFormsComponent,
-        EditEmployeeComponent,
         ParentComponent,
-        CriteriaComponent,
+        WelcomeComponent,
+      LoginComponent,
+      Ch1Component,
+      Ch2Component,
+
+      DashBoardComponent,
 
     ],
     providers: [
       // {provide: HTTP_INTERCEPTORS,useClass:CacheInterceptor,multi:true}
+
     ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule, HttpClientModule,
          BrowserAnimationsModule, FormsModule,ReactiveFormsModule,
-         ToastNoAnimationModule.forRoot(),
+         ToastNoAnimationModule.forRoot(),EmployeeModule,
+         RegionsModule,CountriesModule, DepartmentsModule,
+          LocationsModule, JobsModule, UserModule, CommunicationModule, ChartModule,
+          BrowserAnimationsModule,NgxSpinnerModule.forRoot({ type: 'timer' }),MessageModule
 
     ]
 })

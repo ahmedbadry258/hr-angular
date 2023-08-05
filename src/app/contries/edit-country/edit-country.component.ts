@@ -4,6 +4,7 @@ import { Country } from 'src/app/data/Country';
 import { Region } from 'src/app/data/Region';
 import { DataService } from 'src/app/services/data.service';
 import { Error } from './../../data/Error';
+import { RegionService } from 'src/app/Regions/region.service';
 
 @Component({
   selector: 'app-edit-country',
@@ -13,7 +14,10 @@ import { Error } from './../../data/Error';
 export class EditCountryComponent implements OnInit{
 country :Country;
 regions :Region[];
-  constructor(private route:ActivatedRoute,private dataService:DataService,private router :Router){
+  constructor(private route:ActivatedRoute,
+    private dataService:DataService,
+    private router :Router,
+    private regionService:RegionService){
 this.country={
   countryId:"",countryName:"",region:{
     regionId:0,regionName:""
@@ -31,7 +35,7 @@ this.dataService.findCountryById(this.country.countryId).subscribe(
   ()=>console.log("find Country to edit")
 )
 
-this.dataService.findAllRegions().subscribe(
+this.regionService.findAllRegions().subscribe(
   (data : Region[]|Error) =>this.regions=<Region[]> data,
   (err :Error) =>console.log(err),
   ()=>console.log("get All Region To Select")
@@ -39,7 +43,7 @@ this.dataService.findAllRegions().subscribe(
 
   }
   onSubmit(){
-    this.dataService.findRegion(this.country.region.regionId).subscribe(
+    this.regionService.findRegion(this.country.region.regionId).subscribe(
       (data : Region) => this.country.region =data,
       (err :Error) => console.log(err)
     )

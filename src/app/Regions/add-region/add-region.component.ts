@@ -3,6 +3,7 @@ import { Region } from '../../data/Region';
 import { DataService } from '../../services/data.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RegionService } from './../region.service';
 
 @Component({
   selector: 'app-add-region',
@@ -15,6 +16,7 @@ export class AddRegionComponent implements OnInit {
   }
   regionForm:FormGroup;
   constructor(private dataService :DataService,private toastr: ToastrService,
+              private regionService:RegionService,
     private fb :FormBuilder){
 
       this.regionForm=this.fb.group({
@@ -34,7 +36,7 @@ export class AddRegionComponent implements OnInit {
   onSubmit(){
 
     console.log(this.region)
-    this.dataService.addRegion(this.region).subscribe(
+    this.regionService.addRegion(this.region).subscribe(
       (reg :Region) =>{ this.toastr.success(`Saved Successfull with Id${reg.regionId} `, 'Success');},
       (error :Error) =>this.toastr.error(error.message, error.name)
     )
@@ -42,7 +44,7 @@ export class AddRegionComponent implements OnInit {
   }
   save(){
 this.region=this.regionForm.value
-this.dataService.addRegion(this.region).subscribe(
+this.regionService.addRegion(this.region).subscribe(
  ( data:Region)=>this.toastr.success('Save Region','Success'),
  ( error:Error)=>this.toastr.error(error.message,'Error')
 )

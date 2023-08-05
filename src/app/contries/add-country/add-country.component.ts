@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RegionService } from 'src/app/Regions/region.service';
 import { Country } from 'src/app/data/Country';
 import { Error } from 'src/app/data/Error';
 import { Region } from 'src/app/data/Region';
@@ -14,7 +15,8 @@ import { DataService } from 'src/app/services/data.service';
 export class AddCountryComponent implements OnInit{
   country :Country;
   regions :Region[];
-  constructor(private dataService:DataService,private router :Router){
+  constructor(private dataService:DataService,private router :Router,
+    private regionService:RegionService){
     this.country={
       countryId:"",
       countryName:"",
@@ -35,7 +37,7 @@ export class AddCountryComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.dataService.findAllRegions().subscribe(
+    this.regionService.findAllRegions().subscribe(
       (data : Region[]|Error) =>this.regions=<Region[]> data,
       (err :Error) =>console.log(err),
       ()=>console.log("get All Region To Select")
@@ -46,7 +48,7 @@ export class AddCountryComponent implements OnInit{
     console.log(`region id ${this.country.region.regionId} ${this.country.region.regionName}`)
     let findRegion =this.regions.find(x=>x.regionId== this.country.region.regionId)
     console.log(`filter ${findRegion}`)
-    this.dataService.findRegion(this.country.region.regionId).subscribe(
+    this.regionService.findRegion(this.country.region.regionId).subscribe(
       (data :Region) =>this.country.region= data,
       (err :Error) =>console.log(err)
     )

@@ -1,3 +1,6 @@
 <h4>{{pageTitle}}</h4>
 <input type="text" [ngModel]="name" (ngModelChange)="name=$event"/>
 <label>FirstName <input type="text" #firstNameRef/></label>
+<a routerLink="/ch1"> Child One</a>
+<a routerLink="/ch2"> Child 2</a>
+<router-outlet></router-outlet>

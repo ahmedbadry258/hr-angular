@@ -1,6 +1,7 @@
 import { Department } from "./Department";
 import { Job } from "./Job";
 
+
 export  interface Employee{
     employeeId: number;
     firstName: string;
@@ -15,3 +16,7 @@ export  interface Employee{
     job:Job
   }
 
+export interface EmployeeResolved{
+employee:Employee;
+error:any
+}

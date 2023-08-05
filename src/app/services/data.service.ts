@@ -10,62 +10,33 @@ import { Job } from '../data/Job';
 import { Department } from './../data/Department';
 import { CACHABLE } from '../core/cache.interceptor';
 import { Employee } from '../data/Employee';
+import { DepartmentEmployee } from '../data/DepartmentEmployee';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-private  URL:string="http://localhost:8080/hr";
-
+//private  URL:string="http://localhost:8080/hr";
+private  URL:string="http://localhost:8090";
 
   constructor(private http:HttpClient) {
 
    }
-// start region service
-
-  findAllRegions():Observable<Region[] |Error>{
-    console.log("call region list ");
-    return this.http.get<Region[] >(`${this.URL}/regions`,{
-      context:new HttpContext().set(CACHABLE,false)
-    })
-    .pipe(catchError(err=>this.handleHttpError(err)));
-    //return of(employee);
-  }
-
-
-
-  findRegion(id:number):Observable<Region>{
-    return this.http.get<Region>(`${this.URL}/regions/${id}`);
-  }
-  addRegion(region :Region):Observable<Region>{
-    return this.http.post<Region>(`${this.URL}/regions`,region,{
-      headers: new HttpHeaders({
-        'Content-Type':'application/json'
-      })
-    });
-  }
-  updateRegion(region :Region):Observable<void>{
-    return this.http.put<void>(`${this.URL}/regions/${region.regionId}`,region,{
-      headers: new HttpHeaders({
-        'Content-Type':'application/json'
-      })
-    });
-  }
-deleteRegion(id:number) :Observable<string>{
-  return this.http.delete<string>(`http://localhost:8080/regions/${id}`)
-}
-private handleHttpError(error :HttpErrorResponse):Observable<Error>{
-  let dataError= new Error();
-  dataError.errorNumber=error.status;
-  dataError.message=error.statusText;
-  dataError.friendlyMessage=`an error happen ${error.message}`;
-      return throwError(dataError);
-      }
-// end region services
+   private handleHttpError(error :HttpErrorResponse):Observable<Error>{
+    let dataError= new Error();
+    dataError.errorNumber=error.status;
+    dataError.message=error.statusText;
+    dataError.friendlyMessage=`an error happen ${error.message}`;
+        return throwError(dataError);
+        }
 // start country services
-findAllCountries():Observable<Country[] |Error>{
-  return this.http.get<Country[] |Error>(`${this.URL}/countries`)
+findAllCountriesPagination(page:number ,items:number):Observable<any|Error>{
+  return this.http.get<any |Error>(`${this.URL}/countries/list?page=${page}&items=${items}`)
+  .pipe(catchError(err=>this.handleHttpError(err)));;
+}
+findAllCountries():Observable<Country[]|Error>{
+  return this.http.get<Country[]|Error>(`${this.URL}/countries`)
   .pipe(catchError(err=>this.handleHttpError(err)));;
 }
 findCountryById(id :string):Observable<Country>{
@@ -125,6 +96,9 @@ editJob(job: Job) :Observable<Job>{
 deleteJob(id: string) :Observable<string>{
   return this.http.delete<string>(`${this.URL}/jobs/${id}`)
 }
+findJobsWithPagination(page:number,items:number):Observable<any>{
+ return  this.http.get<any>(`${this.URL}/jobs/list?page=${page}&items=${items}`)
+}
 // end job services
 // start department service
 findAllDepartments() : Observable<Department[]|Error>{
@@ -138,19 +112,13 @@ findDepartmentById(id :number):Observable<Department>{
 }
 
 // end department service
-// start employees service
-findAllEmployees() : Observable<Employee[]>{
-  return this.http.get<Employee[]>(`${this.URL}/employees`)
-}
-findEmployeeById(employeeId:number) : Observable<Employee>{
-  return this.http.get<Employee>(`${this.URL}/employees/${employeeId}`)
-}
-saveEmployee(employee:Employee) : Observable<Employee>{
-  return this.http.post<Employee>(`${this.URL}/employees`,employee)
-}
 
-// end employees service
+// start chart service
 
+countEmployeeByDepartment():Observable<DepartmentEmployee[]>{
+  return this.http.get<DepartmentEmployee[]>(`${this.URL}/employees/countEmployeeByDepartment`)
+}
+// end chart service
 
 }
 

@@ -10,6 +10,9 @@ import { Employee } from './../../data/Employee';
 import { EmployeeView } from './../../data/modelView/EmployeeView';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
+import { EmployeeParametersService } from '../employee-parameters.service';
+import { EmployeeService } from '../employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',
@@ -36,8 +39,12 @@ export class AddEmployeeComponent  implements OnInit{
   postSuccessMessage:string="";
 
   constructor(
-    private dataService :DataService,private toastr: ToastrService,
-    private fb :FormBuilder){
+    private dataService :DataService,
+    private employeeParametersService:EmployeeParametersService,
+    private employeeService:EmployeeService,
+    private toastr: ToastrService,
+    private fb :FormBuilder,
+    private router:Router){
 
       this.employeeForm=this.fb.group({
         employeeId: ['',Validators.required],
@@ -133,7 +140,7 @@ save(){
   console.log('Employee View');
   console.log(this.employeeView);
   this.fillData(this.employeeView);
-  this.dataService.saveEmployee(this.employee).subscribe(
+  this.employeeService.saveEmployee(this.employee).subscribe(
     ( data:Employee)=>this.toastr.success('Save Region','Success'),
     ( error:HttpErrorResponse)=>{this.toastr.error(error.error.errorMessage,'Error');
   console.log(error)}
@@ -167,5 +174,7 @@ this.dataService.findDepartmentById(employeeView.departmentId).subscribe(
   (error:Error)=>console.log(error.message)
 )
 }
-
+onBack(){
+  this.router.navigateByUrl('/employees')
+}
 }

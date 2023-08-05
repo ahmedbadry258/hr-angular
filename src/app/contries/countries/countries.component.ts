@@ -6,31 +6,50 @@ import { Country } from './../../data/Country';
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
-  styleUrls: ['./countries.component.css']
+  styleUrls: ['./countries.component.css'],
 })
-export class CountriesComponent implements OnInit{
-countries : Country[];
-  constructor(private dataService:DataService){
-this.countries=[];
+export class CountriesComponent implements OnInit {
+  countries: Country[];
+  page: number = 0;
+  jobList: Array<any> = [];
+  pages!: Array<number>;
+  noOfItmes: number = 5;
+  items: number[] = [5, 10, 15];
+  constructor(private dataService: DataService) {
+    this.countries = [];
   }
-  loadData(){
-    this.dataService.findAllCountries().subscribe(
-      (data :Country[]|Error) =>this.countries=<Country[]> data,
-      (error : Error)=> console.log(error),
-      ()=>console.log("find All Countries")
+  getAllCountriesPagination() {
+    this.dataService.findAllCountriesPagination(this.page,this.noOfItmes).subscribe(
+      (data: any | Error) => {(this.countries = <any>data['content']),
+      this.pages=this.findPages(data['totalPages'])
+    },
+      (error: Error) => console.log(error),
+      () => console.log('find All Countries')
     );
   }
   ngOnInit(): void {
-    this.loadData();
+    this.getAllCountriesPagination();
   }
-  onClickDelete(id:string){
-    let x=confirm('are u sure ?')
-    if(x){
+  onClickDelete(id: string) {
+    let x = confirm('are u sure ?');
+    if (x) {
       this.dataService.deleteCountry(id).subscribe(
-        (data :string) =>{alert (data) ;this.loadData();},
-        (err:Error)=>console.log(err)
-      )
-
+        (data: string) => {
+          alert(data);
+          this.getAllCountriesPagination();
+        },
+        (err: Error) => console.log(err)
+      );
     }
+  }
+
+  findPages(totalPages: number): number[] {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+  setPage(i: number, event: any) {
+    (this.page = i), this.getAllCountriesPagination();
+  }
+  setItems() {
+    (this.page = 0), this.getAllCountriesPagination();
   }
 }

@@ -1,5 +1,5 @@
 <h4>Jobs</h4>
-<table >
+<table class=" table table-striped" >
   <thead>
     <th>Id</th>
     <th>Title</th>
@@ -7,7 +7,9 @@
     <th>Min Salary</th>
     <th>Action</th>
   </thead>
-<tr *ngFor="let job of jobs">
+<!-- <tr *ngFor="let job of jobs"> -->
+  <tbody>
+  <tr *ngFor="let job of jobList">
   <td> {{job.jobId}}</td>
   <td> {{job.jobTitle}}</td>
   <td> {{job.maxSalary}}</td>
@@ -15,4 +17,24 @@
   <td><a class="btn btn-warning" routerLink="/jobs/{{job.jobId}}"> Edit</a>
     <a class="btn btn-danger" (click)="onClickDelete(job.jobId)"> Delete</a></td>
 </tr>
+</tbody>
 </table>
+<hr>
+<div class="row  justify-content-center">
+
+<div class="col-4">
+
+
+    <select name="item"  [(ngModel)]="noOfItmes" (change)="setItems()">
+      <option *ngFor="let item of items"   [value]="item">{{item}}</option>
+    </select>
+
+</div>
+<div class="col">
+<ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let p of pages ; let i=index">
+    <a class="nav-link " [ngClass]="{'active':i==page}" (click)="setPage(i,$event)">{{i}}</a>
+  </li>
+</ul>
+</div>
+</div>

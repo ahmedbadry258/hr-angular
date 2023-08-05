@@ -1,0 +1,119 @@
+<div class="container p-5">
+  <div class="card">
+    <div class="card-header">Employee Details</div>
+
+    <div class="card-body">
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="firstNameId"
+          >Employee Image</label
+        >
+        <div class="col-md-8">
+          <img  src="assets/imgs/9.png" class="img-thumbnail" alt="img thumbnail" style="height: 100px;">
+        </div>
+      </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="firstNameId"
+            >Employee Id</label
+          >
+          <div class="col-md-8">
+            <p>{{employee.employeeId}}</p>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="firstNameId"
+            >First Name</label
+          >
+          <div class="col-md-8">
+            <label>{{employee.firstName}}</label>
+
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="lastNameId"
+            >Last Name</label
+          >
+          <div class="col-md-8">
+            <label>{{employee.lastName}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="emailId">Email</label>
+          <div class="col-md-8">
+            <label>{{employee.email}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="emailId"
+            >Phone Number</label
+          >
+          <div class="col-md-8">
+            <label>{{employee.phoneNumber }}</label>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="hireDateId"
+            >Hire Date</label
+          >
+          <div class="col-md-8">
+            <label>{{employee.hireDate}}</label>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="emailId">Salary</label>
+          <div class="col-md-8">
+            <label>{{employee.salary}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="emailId">Commission Pct</label>
+          <div class="col-md-8">
+            <label>{{employee.commissionPct}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="emailId">Manager </label>
+          <div class="col-md-8">
+            <label>{{employee.managerId === 0?'none':'{{employee.managerId}}'}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="emailId">Department</label>
+          <div class="col-md-8">
+            <label>{{employee.department.departmentName}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="emailId">job</label>
+          <div class="col-md-8">
+            <label>{{employee.job.jobTitle}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-4">
+            <button (click)="onBack()"
+            class="btn btn-primary mr-3 m-2"
+            type="submit"
+            style="width: 80px">Back
+          </button>
+            <button
+            routerLink="/employees/{{employee.employeeId}}/edit"
+              class="btn btn-primary mr-3 m-2"
+              type="submit"
+              style="width: 80px">Edit
+
+            </button>
+
+          </div>
+        </div>
+
+    </div>
+
+  </div>

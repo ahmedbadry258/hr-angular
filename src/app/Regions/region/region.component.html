@@ -2,14 +2,14 @@
   <h3>Region Management System</h3>
 
 
-  <table class="table" >
+  <table class="table table-striped" >
     <thead>
     <th>ID</th>
     <th>Name</th>
     <th>Actions</th>
   </thead>
   <tbody>
-    <tr *ngFor="let region of regionList">
+    <tr *ngFor="let region of regions">
       <td>{{region.regionId}}</td>
       <td>{{region.regionName}}</td>
       <td>
@@ -20,3 +20,41 @@
   </tbody>
   </table>
 </div>
+<hr>
+<div class="row  justify-content-center">
+
+<div class="col-4">
+
+
+    <select name="item"  [(ngModel)]="noOfItmes" (change)="setItems()">
+      <option *ngFor="let item of items"   [value]="item">{{item}}</option>
+    </select>
+
+</div>
+<div class="col">
+<ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let p of pages ; let i=index">
+    <a class="nav-link " [ngClass]="{'active':i==page}" (click)="setPage(i,$event)">{{i}}</a>
+  </li>
+</ul>
+</div>
+</div>
+<hr>
+<h3 class="text-primary"> Test Service Notifications by Subject and Behavior Subject</h3>
+<div class="row">
+  <div class="col-4">
+    <h5>Region List</h5>
+    <table class="table-bordered">
+      <thead>Name</thead>
+      <tbody>
+        <tr *ngFor="let region of regions">
+          <td (click)="onSelect(region)"  class="text-primary" >  {{region.regionName}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-8">
+    <app-region-details></app-region-details>
+  </div>
+</div>
+
